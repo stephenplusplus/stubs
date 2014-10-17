@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/stephenplusplus/stubs/issues"
   },
-  "homepage": "https://github.com/stephenplusplus/stubs"
+  "homepage": "https://github.com/stephenplusplus/stubs",
+  "devDependencies": {
+    "tess": "^1.0.0"
+  }
 }
