@@ -24,8 +24,13 @@ stubs(mylib, 'create', function() {
 })
 
 // stub it out, but call the original first
-stubs(mylib, 'create', true, function() {
+stubs(mylib, 'create', { callthrough: true }, function() {
   // call original method, then call this
+})
+
+// use the stub for a while, then revert
+stubs(mylib, 'create', { calls: 3 }, function() {
+  // call this 3 times, then use the original method
 })
 ```
 

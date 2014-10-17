@@ -1,9 +1,8 @@
 'use strict';
 
 module.exports = function stubs(obj, method, cfg, stub) {
-  if (!obj || !method) {
-    throw new Error('To stub a method, you must provide an object and a key for a method')
-  }
+  if (!obj || !method || !obj[method])
+    throw new Error('You must provide an object and a key for an existing method')
 
   if (!stub) {
     stub = cfg
@@ -22,7 +21,7 @@ module.exports = function stubs(obj, method, cfg, stub) {
   obj[method] = function() {
     var args = [].slice.call(arguments)
 
-    if (cfg.callthrough && cached)
+    if (cfg.callthrough)
       cached.apply(obj, arguments)
 
     stub.apply(obj, arguments)
