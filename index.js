@@ -22,9 +22,9 @@ module.exports = function stubs(obj, method, cfg, stub) {
     var args = [].slice.call(arguments)
 
     if (cfg.callthrough)
-      cached.apply(obj, arguments)
+      cached.apply(obj, args)
 
-    stub.apply(obj, arguments)
+    stub.apply(obj, args)
 
     if (!norevert && --cfg.calls === 0)
       obj[method] = cached

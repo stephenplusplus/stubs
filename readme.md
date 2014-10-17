@@ -70,4 +70,4 @@ Number of calls to allow the stub to receive until reverting to the original.
 - Type: Function
 - Default: `function() {}`
 
-If `callthrough` is omitted or `false`, this method is called in place of the original method. If `callthrough` is `true`, this method is called *after* the original method is called as well.
+This method is called in place of the original method. If `opts.callthrough` is `true`, this method is called *after* the original method is called as well.
