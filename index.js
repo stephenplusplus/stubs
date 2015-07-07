@@ -20,13 +20,16 @@ module.exports = function stubs(obj, method, cfg, stub) {
 
   obj[method] = function() {
     var args = [].slice.call(arguments)
+    var returnVal
 
     if (cfg.callthrough)
-      cached.apply(obj, args)
+      returnVal = cached.apply(obj, args)
 
     stub.apply(obj, args)
 
     if (!norevert && --cfg.calls === 0)
       obj[method] = cached
+
+    return returnVal
   }
 }

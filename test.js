@@ -72,6 +72,19 @@ tess('stubs', function(it) {
     assert(replacementCalled)
   })
 
+  it('returns value of original method call', function() {
+    var uniqueVal = Date.now()
+
+    var obj = {}
+    obj.method = function() {
+      return uniqueVal
+    }
+
+    stubs(obj, 'method', { callthrough: true }, function() {})
+
+    assert.equal(obj.method(), uniqueVal)
+  })
+
   it('stops calling stub after n calls', function() {
     var timesToCall = 5
     var timesCalled = 0
