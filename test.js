@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var assert = require('assert')
 var stubs = require('./')
@@ -54,6 +54,19 @@ tess('stubs', function(it) {
     assert(replacementCalled)
   })
 
+  it('returns value of overridden method call', function() {
+    var overriddenUniqueVal = {}
+
+    var obj = {}
+    obj.method = function() {}
+
+    stubs(obj, 'method', { callthrough: true }, function() {
+      return overriddenUniqueVal
+    })
+
+    assert.strictEqual(obj.method(), overriddenUniqueVal)
+  })
+
   it('calls through to original method', function() {
     var originalCalled = false
 
@@ -83,6 +96,40 @@ tess('stubs', function(it) {
     stubs(obj, 'method', { callthrough: true }, function() {})
 
     assert.equal(obj.method(), uniqueVal)
+  })
+
+  it('returns calls override and returns original value', function() {
+    var uniqueVal = {}
+    var overrideWasCalled = false
+
+    var obj = {}
+    obj.method = function() {
+      return uniqueVal
+    }
+
+    stubs(obj, 'method', { callthrough: true }, function() {
+      // does not return anything
+      overrideWasCalled = true
+    })
+
+    assert.strictEqual(obj.method(), uniqueVal)
+    assert.strictEqual(overrideWasCalled, true)
+  })
+
+  it('returns value of overridden method call', function() {
+    var uniqueVal = {}
+    var overriddenUniqueVal = {}
+
+    var obj = {}
+    obj.method = function() {
+      return uniqueVal
+    }
+
+    stubs(obj, 'method', { callthrough: true }, function() {
+      return overriddenUniqueVal
+    })
+
+    assert.strictEqual(obj.method(), overriddenUniqueVal)
   })
 
   it('stops calling stub after n calls', function() {

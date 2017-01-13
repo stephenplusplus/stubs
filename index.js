@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = function stubs(obj, method, cfg, stub) {
   if (!obj || !method || !obj[method])
@@ -25,7 +25,7 @@ module.exports = function stubs(obj, method, cfg, stub) {
     if (cfg.callthrough)
       returnVal = cached.apply(obj, args)
 
-    stub.apply(obj, args)
+    returnVal = stub.apply(obj, args) || returnVal
 
     if (!norevert && --cfg.calls === 0)
       obj[method] = cached
