@@ -1,6 +1,6 @@
 {
   "name": "stubs",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Easy method stubber.",
   "main": "index.js",
   "scripts": {
